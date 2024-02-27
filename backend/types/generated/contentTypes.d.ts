@@ -362,6 +362,46 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiAppointmentAppointment extends Schema.CollectionType {
+  collectionName: 'appointments';
+  info: {
+    singularName: 'appointment';
+    pluralName: 'appointments';
+    displayName: 'Appointment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    UserName: Attribute.String;
+    Email: Attribute.Email & Attribute.Required;
+    Time: Attribute.Time;
+    Note: Attribute.RichText;
+    doctor: Attribute.Relation<
+      'api::appointment.appointment',
+      'oneToOne',
+      'api::doctor.doctor'
+    >;
+    Date: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::appointment.appointment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::appointment.appointment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -461,6 +501,11 @@ export interface ApiDoctorDoctor extends Schema.CollectionType {
       'api::doctor.doctor',
       'manyToMany',
       'api::category.category'
+    >;
+    appointment: Attribute.Relation<
+      'api::doctor.doctor',
+      'oneToOne',
+      'api::appointment.appointment'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -911,6 +956,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::appointment.appointment': ApiAppointmentAppointment;
       'api::category.category': ApiCategoryCategory;
       'api::category.send-email': ApiCategorySendEmail;
       'api::doctor.doctor': ApiDoctorDoctor;

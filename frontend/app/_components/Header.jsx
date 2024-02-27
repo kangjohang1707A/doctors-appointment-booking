@@ -27,6 +27,8 @@ function Header() {
 
     const { user } = useKindeBrowserClient();
 
+    // console.log("user in Header=> ", user);
+
     return (
         <div className="flex items-center justify-between p-4 shadow-sm">
             <div className="flex items-center gap-10">
@@ -54,11 +56,11 @@ function Header() {
                     </PopoverTrigger>
                     <PopoverContent className="w-44">
                         <ul className="flex flex-col gap-2 ">
-                            <li className="cursor-pointer hover:bg-slate-100 p-2 rounded-md">
+                            {/* <li className="cursor-pointer hover:bg-slate-100 p-2 rounded-md">
                                 Profile
-                            </li>
+                            </li> */}
                             <li className="cursor-pointer hover:bg-slate-100 p-2 rounded-md">
-                                My Booking
+                                <Link href={"/my-booking"}>My Booking</Link>
                             </li>
                             <li className="cursor-pointer hover:bg-slate-100 p-2 rounded-md">
                                 <LogoutLink> Logout</LogoutLink>

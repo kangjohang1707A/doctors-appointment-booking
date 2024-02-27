@@ -68,6 +68,12 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "inversedBy": "doctors"
+    },
+    "appointment": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::appointment.appointment",
+      "mappedBy": "doctor"
     }
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 function layout({ children }) {
     return (
-        <div className='h-screen' >
+        <div className='lg:h-screen' >
             {children}
         </div>
     );
